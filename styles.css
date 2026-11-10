@@ -1,0 +1,222 @@
+/* ─── Design tokens (brandbook v1.0) ─── */
+:root {
+  --violet: #6B3AFF;
+  --violet-deep: #2C0E8A;
+  --violet-strong: #4A1FD9;
+  --violet-soft: #B59CFF;
+  --coral: #FF4D6D;
+  --coral-soft: #FFE4E9;
+  --ink: #0E0E14;
+  --ink-soft: #4A4A55;
+  --ink-muted: #888892;
+  --paper: #FAFAF7;
+  --white: #FFFFFF;
+  --border: #EEEEF0;
+
+  --bg: var(--paper);
+  --surface: var(--white);
+  --fg: var(--ink);
+  --fg-soft: var(--ink-soft);
+  --fg-muted: var(--ink-muted);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #05050A;
+    --surface: #11111A;
+    --fg: #F5F5F7;
+    --fg-soft: #B5B5BF;
+    --fg-muted: #6E6E78;
+    --border: #2A2A35;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin: 0 0 16px;
+  text-wrap: balance;
+}
+
+h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 900; letter-spacing: -0.035em; }
+h2 { font-size: clamp(22px, 3vw, 28px); margin-top: 48px; }
+h3 { font-size: 18px; margin-top: 32px; }
+
+p { margin: 0 0 16px; color: var(--fg); }
+
+a { color: var(--violet); text-decoration: none; transition: color .15s; }
+a:hover { color: var(--coral); }
+
+strong { font-weight: 700; color: var(--fg); }
+
+ul, ol { padding-left: 24px; margin: 0 0 16px; }
+li { margin-bottom: 6px; }
+
+/* ─── Nav ─── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in oklab, var(--bg) 85%, transparent);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px max(20px, env(safe-area-inset-left, 0px)) 14px max(20px, env(safe-area-inset-right, 0px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+}
+.nav-brand .logo { width: 30px; height: 30px; }
+.nav-links { display: flex; gap: 20px; font-size: 14px; }
+.nav-links a { color: var(--fg-soft); font-weight: 500; }
+.nav-links a:hover { color: var(--violet); }
+@media (max-width: 540px) {
+  .nav-links { gap: 14px; font-size: 13px; }
+}
+
+/* ─── Main container ─── */
+main {
+  flex: 1;
+  padding: clamp(32px, 5vh, 64px) max(20px, env(safe-area-inset-left, 0px)) clamp(48px, 7vh, 96px) max(20px, env(safe-area-inset-right, 0px));
+}
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.container.wide { max-width: 980px; }
+
+/* ─── Home hero ─── */
+.hero {
+  text-align: center;
+  padding: clamp(40px, 10vh, 120px) 0;
+}
+.hero .isotype { width: 96px; height: 96px; margin: 0 auto 24px; display: block; }
+.hero h1 { font-size: clamp(42px, 8vw, 80px); line-height: 0.95; margin-bottom: 8px; }
+.hero .brand-sub { font-size: 11px; font-weight: 600; letter-spacing: 0.42em; color: var(--fg-muted); margin-bottom: 32px; }
+.hero .tagline { font-size: clamp(18px, 2.4vw, 24px); color: var(--fg-soft); max-width: 32ch; margin: 0 auto 40px; line-height: 1.4; }
+.pill-badges { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; }
+.pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg-soft);
+}
+.pill-soon { background: var(--coral-soft); color: #B01E3C; border-color: #FFCCD3; }
+.cta-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 40px 32px;
+  margin-top: 48px;
+  text-align: center;
+}
+.cta-section h2 { margin-top: 0; }
+.cta-section p { color: var(--fg-soft); max-width: 50ch; margin: 0 auto 24px; }
+
+/* ─── Document styles (privacy/terms) ─── */
+.doc-header {
+  text-align: center;
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+.doc-header .eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--coral);
+  margin-bottom: 14px;
+}
+.doc-header h1 { margin-bottom: 8px; }
+.doc-header .meta {
+  font-size: 13px;
+  color: var(--fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+.doc-section {
+  margin-bottom: 32px;
+}
+.doc-section p, .doc-section li { color: var(--fg-soft); }
+.doc-section strong { color: var(--fg); }
+
+.callout {
+  padding: 16px 20px;
+  background: color-mix(in oklab, var(--violet) 8%, var(--surface));
+  border: 1px solid color-mix(in oklab, var(--violet) 25%, var(--border));
+  border-radius: 12px;
+  font-size: 14px;
+  color: var(--fg);
+  margin: 16px 0;
+}
+.callout strong { color: var(--violet); }
+
+.toc {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-bottom: 40px;
+}
+.toc h3 {
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.toc ol { margin: 0; padding-left: 20px; }
+.toc li { font-size: 14px; margin-bottom: 4px; color: var(--fg-soft); }
+.toc a { color: var(--fg-soft); font-weight: 500; }
+.toc a:hover { color: var(--violet); }
+
+/* ─── Footer ─── */
+footer {
+  padding: 32px max(20px, env(safe-area-inset-left, 0px));
+  text-align: center;
+  font-size: 12px;
+  color: var(--fg-muted);
+  border-top: 1px solid var(--border);
+  line-height: 1.7;
+}
+footer .legal-links {
+  display: flex; gap: 20px; justify-content: center; margin-bottom: 10px; flex-wrap: wrap;
+}
+footer .legal-links a { color: var(--fg-soft); font-weight: 500; }
+
+:focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; border-radius: 4px; }
