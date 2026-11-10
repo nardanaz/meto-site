@@ -621,6 +621,345 @@ body.home {
   z-index: -1;
 }
 
+/* ────────────────────────────────────────────────────── */
+/* Screen overlays — the lead of each chapter            */
+/* ────────────────────────────────────────────────────── */
+.screen-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 400ms var(--ease-out-fast);
+}
+.screen-overlay.is-active { opacity: 1; }
+
+/* ─── Chapter 01: FEED — cursor doing a swipe right ─── */
+.overlay-feed {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 0 92px;
+}
+.swipe-cursor {
+  position: absolute;
+  top: 48%;
+  left: 18%;
+  transform: translateY(-50%) translateX(0) scale(0.6);
+  filter: drop-shadow(0 4px 12px rgba(255, 77, 109, 0.4));
+  will-change: transform, opacity;
+}
+.overlay-feed.is-active .swipe-cursor {
+  animation: swipe-right 2.4s var(--ease-in-out-smooth) 0.3s infinite;
+}
+@keyframes swipe-right {
+  0%   { transform: translateY(-50%) translateX(0)      scale(0.6); opacity: 0; }
+  10%  { transform: translateY(-50%) translateX(0)      scale(1);   opacity: 1; }
+  60%  { transform: translateY(-50%) translateX(120px)  scale(1);   opacity: 1; }
+  80%  { transform: translateY(-50%) translateX(160px)  scale(0.8); opacity: 0.4; }
+  100% { transform: translateY(-50%) translateX(160px)  scale(0.6); opacity: 0; }
+}
+.swipe-ghost {
+  position: absolute;
+  top: 38%;
+  left: 14%;
+  width: 72%;
+  height: 24%;
+  border-radius: 14px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 77, 109, 0.12) 100%);
+  opacity: 0;
+  will-change: opacity, transform;
+}
+.overlay-feed.is-active .swipe-ghost {
+  animation: swipe-ghost 2.4s var(--ease-in-out-smooth) 0.3s infinite;
+}
+@keyframes swipe-ghost {
+  0%, 10%  { opacity: 0; transform: translateX(0); }
+  40%      { opacity: 1; transform: translateX(60px) rotate(2deg); }
+  70%      { opacity: 0; transform: translateX(140px) rotate(6deg); }
+  100%     { opacity: 0; transform: translateX(140px) rotate(6deg); }
+}
+.swipe-arrow {
+  position: absolute;
+  top: 48%;
+  right: 20px;
+  display: flex;
+  gap: 4px;
+  transform: translateY(-50%);
+  opacity: 0;
+}
+.swipe-arrow span {
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid var(--coral);
+  border-top: 2px solid var(--coral);
+  transform: rotate(45deg);
+  opacity: 0.3;
+}
+.overlay-feed.is-active .swipe-arrow {
+  animation: swipe-arrow-fade 2.4s var(--ease-in-out-smooth) 0.3s infinite;
+}
+.overlay-feed.is-active .swipe-arrow span:nth-child(1) { animation: arrow-pulse 2.4s var(--ease-in-out-smooth) 0.3s infinite; }
+.overlay-feed.is-active .swipe-arrow span:nth-child(2) { animation: arrow-pulse 2.4s var(--ease-in-out-smooth) 0.45s infinite; }
+.overlay-feed.is-active .swipe-arrow span:nth-child(3) { animation: arrow-pulse 2.4s var(--ease-in-out-smooth) 0.6s infinite; }
+@keyframes swipe-arrow-fade {
+  0%, 10%, 100% { opacity: 0; }
+  30%, 70% { opacity: 1; }
+}
+@keyframes arrow-pulse {
+  0%, 60%, 100% { opacity: 0.2; }
+  30% { opacity: 1; }
+}
+
+/* ─── Chapter 02: MATCH — chip emerges with spring ─── */
+.overlay-match {
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at center, rgba(107, 58, 255, 0.18), transparent 60%);
+}
+.match-burst {
+  display: grid;
+  place-items: center;
+}
+.match-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  background: var(--coral);
+  color: #fff;
+  border-radius: 999px;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  box-shadow: 0 16px 40px rgba(255, 77, 109, 0.45),
+              0 4px 12px rgba(255, 77, 109, 0.3);
+  transform: scale(0) rotate(-8deg);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.overlay-match.is-active .match-chip {
+  animation: match-pop 1.4s cubic-bezier(0.34, 1.6, 0.4, 1) 0.1s forwards;
+}
+@keyframes match-pop {
+  0%   { transform: scale(0)    rotate(-8deg); opacity: 0; }
+  40%  { transform: scale(1.12) rotate(2deg);  opacity: 1; }
+  60%  { transform: scale(0.96) rotate(-1deg); opacity: 1; }
+  80%  { transform: scale(1.02) rotate(0);     opacity: 1; }
+  100% { transform: scale(1)    rotate(0);     opacity: 1; }
+}
+.match-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  animation: pulse-dot 1.6s var(--ease-in-out-smooth) infinite;
+}
+
+.match-spark {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--coral);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.match-spark-a { top: 26%; left: 22%; --sx: -60px; --sy: -40px; }
+.match-spark-b { top: 26%; right: 22%; --sx: 60px; --sy: -40px; }
+.match-spark-c { bottom: 30%; left: 20%; --sx: -50px; --sy: 50px; }
+.match-spark-d { bottom: 30%; right: 20%; --sx: 50px; --sy: 50px; }
+
+.overlay-match.is-active .match-spark {
+  animation: spark-burst 1s var(--ease-out-fast) 0.35s forwards;
+}
+@keyframes spark-burst {
+  0%   { transform: translate(0, 0) scale(0.6); opacity: 0; }
+  20%  { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--sx), var(--sy)) scale(0.4); opacity: 0; }
+}
+
+/* ─── Chapter 03: CHAT — bubbles cascading up ─── */
+.overlay-chat {
+  display: flex;
+  align-items: flex-end;
+  padding: 0 14px 92px;
+}
+.chat-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+.chat-bubble {
+  display: inline-flex;
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+  max-width: 78%;
+  opacity: 0;
+  transform: translateY(16px) scale(0.92);
+  will-change: transform, opacity;
+}
+.chat-bubble-them {
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--border);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 2px 6px rgba(14, 14, 20, 0.05);
+}
+.chat-bubble-you {
+  background: var(--violet);
+  color: #fff;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+  box-shadow: 0 2px 6px rgba(107, 58, 255, 0.35);
+}
+.overlay-chat.is-active .chat-bubble:nth-child(1) { animation: bubble-in 500ms var(--ease-out-fast) 0.1s forwards; }
+.overlay-chat.is-active .chat-bubble:nth-child(2) { animation: bubble-in 500ms var(--ease-out-fast) 0.5s forwards; }
+.overlay-chat.is-active .chat-bubble:nth-child(3) { animation: bubble-in 500ms var(--ease-out-fast) 0.9s forwards; }
+.overlay-chat.is-active .chat-typing { animation: typing-in 400ms var(--ease-out-fast) 1.4s forwards; }
+@keyframes bubble-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.92); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+@keyframes typing-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.chat-typing {
+  display: inline-flex;
+  gap: 4px;
+  padding: 10px 14px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid var(--border);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  opacity: 0;
+}
+.chat-typing span {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--fg-muted);
+}
+.overlay-chat.is-active .chat-typing span:nth-child(1) { animation: typing-dot 1.2s var(--ease-in-out-smooth) 1.5s infinite; }
+.overlay-chat.is-active .chat-typing span:nth-child(2) { animation: typing-dot 1.2s var(--ease-in-out-smooth) 1.65s infinite; }
+.overlay-chat.is-active .chat-typing span:nth-child(3) { animation: typing-dot 1.2s var(--ease-in-out-smooth) 1.8s infinite; }
+@keyframes typing-dot {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-3px); }
+}
+
+/* ─── Chapter 04: SELL — form self-completes ─── */
+.overlay-sell {
+  display: block;
+}
+.sell-focus {
+  position: absolute;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+.sell-focus-photo {
+  top: 26%;
+  left: 14%;
+  width: 72%;
+  height: 28%;
+  border-radius: 14px;
+  background: linear-gradient(110deg,
+    transparent 30%,
+    rgba(107, 58, 255, 0.18) 48%,
+    rgba(255, 77, 109, 0.14) 52%,
+    transparent 70%);
+  background-size: 300% 100%;
+  background-position: -100% 0;
+}
+.overlay-sell.is-active .sell-focus-photo {
+  opacity: 1;
+  animation: sell-shimmer 2.6s var(--ease-in-out-smooth) 0.2s infinite;
+}
+@keyframes sell-shimmer {
+  0%   { background-position: -100% 0; }
+  100% { background-position:  200% 0; }
+}
+
+.sell-focus-price {
+  top: 61%;
+  left: 14%;
+  padding: 6px 12px;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 800;
+  font-size: 16px;
+  border-radius: 10px;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  min-width: 70px;
+  transform: translateY(8px);
+}
+.sell-price-text::before { content: attr(data-value); }
+.overlay-sell.is-active .sell-focus-price {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 400ms var(--ease-out-fast) 0.3s,
+              transform 400ms var(--ease-out-fast) 0.3s;
+}
+
+.sell-focus-chip {
+  bottom: 22%;
+  right: 14%;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--coral);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transform: translateX(16px);
+}
+.overlay-sell.is-active .sell-focus-chip {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 400ms var(--ease-out-fast) 0.6s,
+              transform 500ms cubic-bezier(0.34, 1.4, 0.4, 1) 0.6s;
+}
+
+/* ─── Progress rail (chapter indicator next to captions) ─── */
+.chapter-rail {
+  position: absolute;
+  top: 0;
+  left: -4px;
+  width: 2px;
+  height: 100%;
+  background: var(--border);
+  overflow: hidden;
+  border-radius: 999px;
+}
+.chapter-rail-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: linear-gradient(to bottom, var(--violet), var(--coral));
+  transition: height 150ms linear;
+}
+.product-captions { position: relative; padding-left: 20px !important; }
+.product-captions li { padding-left: 0 !important; border-left: none !important; }
+
+/* Reduced motion — kill the overlay choreography, leave only crossfade */
+@media (prefers-reduced-motion: reduce) {
+  .screen-overlay,
+  .screen-overlay * { animation: none !important; transform: none !important; }
+  .screen-overlay { display: none !important; }
+}
+
 .product-spacer { height: 100vh; }
 
 @media (max-width: 860px) {

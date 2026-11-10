@@ -323,11 +323,13 @@
 
     const section = document.querySelector('.product');
     const images = section ? section.querySelectorAll('.phone-screen img') : [];
+    const overlays = section ? section.querySelectorAll('.screen-overlay') : [];
     const captions = section ? section.querySelectorAll('.product-captions li') : [];
     if (!section || !images.length) return;
 
     const steps = Array.from(images).map(img => img.dataset.screen);
 
+    let currentKey = null;
     ScrollTrigger.create({
       trigger: section,
       start: 'top top',
@@ -336,8 +338,12 @@
       onUpdate(self) {
         const idx = Math.min(steps.length - 1, Math.floor(self.progress * steps.length));
         const key = steps[idx];
+        if (key === currentKey) return;
+        currentKey = key;
         images.forEach(img => img.classList.toggle('is-active', img.dataset.screen === key));
         captions.forEach(cap => cap.classList.toggle('is-active', cap.dataset.screen === key));
+        overlays.forEach(ov => ov.classList.toggle('is-active', ov.dataset.overlay === key));
+        onChapterChange(key);
       },
     });
 
@@ -354,6 +360,35 @@
       ease: 'power3.out',
       stagger: 0.12,
     });
+  }
+
+  // When chapter changes, kick one-shot interactive sub-animations
+  // that CSS can't own (e.g. typewriter for the price).
+  let _priceTimer = null;
+  function onChapterChange(key) {
+    // Cancel any previous timer so interruptions don't stack
+    if (_priceTimer) {
+      clearTimeout(_priceTimer);
+      _priceTimer = null;
+    }
+    if (key === 'sell') {
+      const priceEl = document.querySelector('.sell-price-text');
+      if (priceEl) {
+        priceEl.textContent = '';
+        typewrite(priceEl, '$3.500', 55, 650);
+      }
+    }
+  }
+
+  function typewrite(el, text, speed, startDelay) {
+    let i = 0;
+    const tick = () => {
+      if (i > text.length) return;
+      el.textContent = text.slice(0, i);
+      i++;
+      _priceTimer = setTimeout(tick, speed);
+    };
+    _priceTimer = setTimeout(tick, startDelay || 0);
   }
 
   // ────────────────────────────────────────────────────

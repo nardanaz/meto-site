@@ -216,6 +216,47 @@
               <img src="/assets/mockups/04-match.png" alt="" data-screen="match" width="300" height="620">
               <img src="/assets/mockups/05-chat.png" alt="" data-screen="chat" width="300" height="620">
               <img src="/assets/mockups/06-sell.png" alt="" data-screen="sell" width="300" height="620">
+
+              <!-- Overlays animados: lead del chapter actúa aquí -->
+              <div class="screen-overlay overlay-feed" data-overlay="feed">
+                <svg class="swipe-cursor" viewBox="0 0 48 48" width="48" height="48" aria-hidden="true">
+                  <circle cx="24" cy="24" r="22" fill="rgba(255, 77, 109, 0.12)"/>
+                  <circle cx="24" cy="24" r="12" fill="#FF4D6D"/>
+                  <circle cx="24" cy="24" r="6" fill="#FFFFFF"/>
+                </svg>
+                <div class="swipe-ghost"></div>
+                <div class="swipe-arrow">
+                  <span></span><span></span><span></span>
+                </div>
+              </div>
+
+              <div class="screen-overlay overlay-match" data-overlay="match">
+                <div class="match-burst">
+                  <span class="match-chip">
+                    <span class="match-dot" aria-hidden="true"></span>
+                    MATCH
+                  </span>
+                </div>
+                <span class="match-spark match-spark-a"></span>
+                <span class="match-spark match-spark-b"></span>
+                <span class="match-spark match-spark-c"></span>
+                <span class="match-spark match-spark-d"></span>
+              </div>
+
+              <div class="screen-overlay overlay-chat" data-overlay="chat">
+                <div class="chat-stack">
+                  <div class="chat-bubble chat-bubble-them"><span>¿Me lo guardás para las 7?</span></div>
+                  <div class="chat-bubble chat-bubble-you"><span>Dale, pasá cuando puedas.</span></div>
+                  <div class="chat-bubble chat-bubble-them"><span>Perfecto. Hoffman 237.</span></div>
+                  <div class="chat-typing"><span></span><span></span><span></span></div>
+                </div>
+              </div>
+
+              <div class="screen-overlay overlay-sell" data-overlay="sell">
+                <div class="sell-focus sell-focus-photo"></div>
+                <div class="sell-focus sell-focus-price"><span class="sell-price-text"></span></div>
+                <div class="sell-focus sell-focus-chip">4 cuadras</div>
+              </div>
             </div>
           </div>
 
