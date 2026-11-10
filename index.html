@@ -3,20 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>MeTo · Mercado hiperlocal</title>
-<meta name="description" content="MeTo es un marketplace hiperlocal con swipe. Descubrí, matcheá y cerrá transacciones con vecinos a cuadras a la redonda. Sin envíos.">
+<title>MeTo · Lo que tenés cerca, en un swipe</title>
+<meta name="description" content="MeTo es el marketplace hiperlocal de tu barrio. Descubrí, matcheá y cerrá transacciones con vecinos a cuadras a la redonda. Sin envíos, sin esperas, sin fricción.">
 <meta name="theme-color" content="#6B3AFF">
-<meta property="og:title" content="MeTo — Lo que tenés cerca, en un swipe">
-<meta property="og:description" content="Marketplace hiperlocal con match recíproco. Comprá y vendé entre vecinos, sin envíos.">
+
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://meto.com.ar">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
+<meta property="og:title" content="MeTo — Lo que tenés cerca, en un swipe">
+<meta property="og:description" content="Marketplace hiperlocal con match recíproco. Comprá y vendé entre vecinos, sin envíos.">
+<meta name="twitter:card" content="summary_large_image">
 
-<nav class="nav">
-  <a href="/" class="nav-brand">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="home.css">
+
+<link rel="preload" as="image" href="/assets/mockups/03-feed.png">
+<link rel="preload" as="image" href="/assets/mockups/04-match.png">
+</head>
+<body class="home">
+
+<!-- Nav ─────────────────────────────────────────────── -->
+<nav class="nav home-nav" aria-label="Principal">
+  <a href="/" class="nav-brand" aria-label="Ir al inicio de MeTo">
     <svg class="logo" viewBox="0 0 140 140" aria-hidden="true">
       <rect width="140" height="140" rx="32" fill="#6B3AFF" />
       <g transform="translate(28, 28)">
@@ -32,48 +42,321 @@
   <div class="nav-links">
     <a href="/privacy">Privacidad</a>
     <a href="/terms">Términos</a>
+    <a href="#waitlist" class="nav-cta" data-scroll-to="#waitlist">
+      <span>Entrar a la lista</span>
+      <span class="nav-cta-dot" aria-hidden="true"></span>
+    </a>
   </div>
 </nav>
 
-<main>
-  <div class="container">
-    <section class="hero">
-      <svg class="isotype" viewBox="0 0 140 140" aria-label="MeTo isotipo">
-        <rect width="140" height="140" rx="32" fill="#6B3AFF" />
-        <g transform="translate(28, 28)">
-          <rect x="0" y="0" width="38" height="38" rx="4" fill="#FFFFFF" />
-          <rect x="46" y="0" width="38" height="38" rx="4" fill="#FFFFFF" />
-          <rect x="0" y="46" width="38" height="38" rx="4" fill="#FFFFFF" />
-          <rect x="46" y="46" width="38" height="38" rx="4" fill="#FFFFFF" />
-          <circle cx="42" cy="42" r="8" fill="#FF4D6D" />
-        </g>
-      </svg>
-      <h1>MeTo</h1>
-      <p class="brand-sub">MERCADO TOUCH</p>
-      <p class="tagline">Lo que tenés cerca, en un swipe.</p>
+<main id="main">
 
-      <div class="pill-badges">
-        <span class="pill pill-soon">📱 Próximamente en App Store</span>
-        <span class="pill pill-soon">🤖 Próximamente en Google Play</span>
+  <!-- HERO ───────────────────────────────────────────── -->
+  <section class="hero" id="hero">
+    <canvas class="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-grain" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-dot" aria-hidden="true"></span>
+        <span>Próximamente en CABA</span>
       </div>
 
-      <div class="cta-section">
-        <h2>Un marketplace para vecinos</h2>
-        <p>Descubrí productos a cuadras a la redonda con un mazo de tarjetas. Deslizá a la derecha lo que te interesa. Cuando hay match recíproco, se abre un chat para coordinar el retiro en persona. Sin envíos, sin esperas, sin fricción.</p>
-        <p><a href="mailto:hola@meto.com.ar"><strong>hola@meto.com.ar</strong></a></p>
+      <h1 class="hero-title">
+        <span class="hero-line"><span class="hero-word">Lo</span> <span class="hero-word">que</span> <span class="hero-word">tenés</span></span>
+        <span class="hero-line"><span class="hero-word hero-accent">cerca,</span></span>
+        <span class="hero-line"><span class="hero-word">en</span> <span class="hero-word">un</span> <span class="hero-word">swipe.</span></span>
+      </h1>
+
+      <p class="hero-sub">
+        Marketplace hiperlocal con match recíproco. Comprá y vendé entre vecinos a cuadras a la redonda. <span class="sub-strong">Sin envíos. Sin esperas. Sin fricción.</span>
+      </p>
+
+      <div class="hero-meta">
+        <span class="meta-pill">
+          <span class="meta-pill-dot" aria-hidden="true"></span>
+          Mercado Touch
+        </span>
+        <span class="meta-pill">
+          by <strong>Avalon Agency SRL</strong>
+        </span>
       </div>
-    </section>
-  </div>
+    </div>
+
+    <a href="#problem" class="scroll-cue" aria-label="Seguir leyendo">
+      <span class="scroll-cue-label">scroll</span>
+      <span class="scroll-cue-line" aria-hidden="true"></span>
+    </a>
+  </section>
+
+  <!-- PROBLEM ─────────────────────────────────────────── -->
+  <section class="problem section-ink" id="problem">
+    <div class="section-container">
+      <p class="eyebrow eyebrow-light">01 · El problema</p>
+      <h2 class="section-title big-stat">
+        <span class="stat-number" data-counter="80">0</span><span class="stat-unit">%</span>
+      </h2>
+      <p class="section-lede">
+        de las ventas chicas <span class="lede-strike">mueren en el envío</span>.<br>
+        El costo del cadete supera el del producto.
+      </p>
+
+      <div class="problem-grid">
+        <div class="problem-card" data-reveal>
+          <p class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/>
+              <path d="M3 7l9 4 9-4"/>
+              <path d="M12 11v10"/>
+            </svg>
+          </p>
+          <h3>Fricción logística</h3>
+          <p>El costo del envío abandona la transacción antes de empezar.</p>
+        </div>
+
+        <div class="problem-card" data-reveal>
+          <p class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </p>
+          <h3>Chats eternos</h3>
+          <p>Tres días de ida y vuelta para coordinar un retiro a 40 cuadras.</p>
+        </div>
+
+        <div class="problem-card" data-reveal>
+          <p class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20M2 12h20"/>
+            </svg>
+          </p>
+          <h3>Marketplace anónimo</h3>
+          <p>Comprar a un desconocido del otro lado de la ciudad, sin confianza barrial.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS ────────────────────────────────────── -->
+  <section class="how" id="how">
+    <div class="section-container">
+      <p class="eyebrow">02 · Cómo funciona</p>
+      <h2 class="section-title">Tres gestos.<br>Cero envíos.</h2>
+
+      <ol class="steps">
+        <li class="step" data-reveal>
+          <div class="step-meta">
+            <span class="step-num">01</span>
+            <span class="step-dot" aria-hidden="true"></span>
+          </div>
+          <h3>Descubrís</h3>
+          <p>Un mazo de tarjetas con productos a cuadras a la redonda. Deslizás a la derecha lo que te gusta.</p>
+        </li>
+
+        <li class="step" data-reveal>
+          <div class="step-meta">
+            <span class="step-num">02</span>
+            <span class="step-dot step-dot-coral" aria-hidden="true"></span>
+          </div>
+          <h3>Matcheás</h3>
+          <p>Cuando el interés es mutuo, se abre el chat. Match cercano, intención clara.</p>
+        </li>
+
+        <li class="step" data-reveal>
+          <div class="step-meta">
+            <span class="step-num">03</span>
+            <span class="step-dot" aria-hidden="true"></span>
+          </div>
+          <h3>Cerrás</h3>
+          <p>Retiro en persona el mismo día. Sin logística, sin esperas, sin intermediarios.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- PRODUCT (scroll-scrub) ──────────────────────────── -->
+  <section class="product" id="product" aria-label="El producto">
+    <div class="product-sticky">
+      <div class="product-container">
+
+        <div class="product-copy">
+          <p class="eyebrow">03 · El producto</p>
+          <h2 class="section-title">Instalable<br>hoy.</h2>
+
+          <ul class="product-captions" aria-hidden="true">
+            <li data-screen="feed" class="is-active">
+              <span class="caption-num">01 / 04</span>
+              <strong>Feed con swipe.</strong>
+              <span>Deslizás productos como quien pasa por una vidriera.</span>
+            </li>
+            <li data-screen="match">
+              <span class="caption-num">02 / 04</span>
+              <strong>Match recíproco.</strong>
+              <span>Cuando los dos deslizan a la derecha, se abre el chat.</span>
+            </li>
+            <li data-screen="chat">
+              <span class="caption-num">03 / 04</span>
+              <strong>Chat directo.</strong>
+              <span>Coordinás el retiro en persona. Sin intermediarios.</span>
+            </li>
+            <li data-screen="sell">
+              <span class="caption-num">04 / 04</span>
+              <strong>Vender es tres pasos.</strong>
+              <span>Foto, precio, cuadras. El resto es trabajo nuestro.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="product-phone" aria-hidden="true">
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <img src="/assets/mockups/03-feed.png" alt="" data-screen="feed" class="is-active" width="300" height="620">
+              <img src="/assets/mockups/04-match.png" alt="" data-screen="match" width="300" height="620">
+              <img src="/assets/mockups/05-chat.png" alt="" data-screen="chat" width="300" height="620">
+              <img src="/assets/mockups/06-sell.png" alt="" data-screen="sell" width="300" height="620">
+            </div>
+          </div>
+
+          <div class="phone-shadow" aria-hidden="true"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Invisible scroll spacers to drive the scrub -->
+    <div class="product-spacer" data-screen="feed"></div>
+    <div class="product-spacer" data-screen="match"></div>
+    <div class="product-spacer" data-screen="chat"></div>
+    <div class="product-spacer" data-screen="sell"></div>
+  </section>
+
+  <!-- MANIFESTO ──────────────────────────────────────── -->
+  <section class="manifesto section-violet" id="manifesto">
+    <div class="section-container">
+      <p class="eyebrow eyebrow-light">04 · Para quién es MeTo</p>
+      <div class="manifesto-lines">
+        <p class="manifesto-line" data-reveal>Para quien liquidó la bici y se cansó del chat eterno.</p>
+        <p class="manifesto-line" data-reveal>Para la que mudó y quiere soltar la mesa que no entra.</p>
+        <p class="manifesto-line" data-reveal>Para el que no quiere mandar un cadete por $8.000.</p>
+        <p class="manifesto-line" data-reveal>Para quien sabe que el vecino es mejor negocio.</p>
+        <p class="manifesto-line manifesto-closing" data-reveal>Para gente que confía en lo que tiene cerca.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAITLIST ───────────────────────────────────────── -->
+  <section class="waitlist" id="waitlist">
+    <div class="section-container">
+      <p class="eyebrow">05 · Entrar a la lista</p>
+      <h2 class="section-title waitlist-title">
+        Primero tu barrio.<br>
+        Después tu <span class="waitlist-accent">zona</span>.
+      </h2>
+      <p class="section-lede">
+        Arrancamos por CABA en los próximos meses. Dejá tu mail y te avisamos cuando MeTo esté disponible donde vivís.
+      </p>
+
+      <form class="waitlist-form" id="waitlist-form" novalidate>
+        <div class="form-row">
+          <label class="visually-hidden" for="wl-email">Email</label>
+          <input
+            type="email"
+            id="wl-email"
+            name="email"
+            required
+            placeholder="tu@email.com"
+            autocomplete="email"
+            inputmode="email"
+            spellcheck="false"
+            autocapitalize="none"
+          >
+          <label class="visually-hidden" for="wl-hood">Barrio (opcional)</label>
+          <input
+            type="text"
+            id="wl-hood"
+            name="neighborhood"
+            placeholder="Barrio (opcional)"
+            autocomplete="address-level3"
+            maxlength="60"
+          >
+          <button type="submit" class="waitlist-submit">
+            <span class="submit-label">Entrar a la lista</span>
+            <span class="submit-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"/>
+                <path d="m12 5 7 7-7 7"/>
+              </svg>
+            </span>
+          </button>
+        </div>
+
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+
+        <p class="form-fine">
+          Al enviar aceptás la <a href="/privacy">Política de privacidad</a>.
+          Nunca vamos a compartir tu email con terceros.
+        </p>
+      </form>
+
+      <div class="waitlist-counter" id="waitlist-counter" aria-hidden="true">
+        <span class="counter-dot"></span>
+        <span class="counter-num" data-counter-target="0">0</span>
+        <span class="counter-label">vecinos ya en la lista</span>
+      </div>
+    </div>
+  </section>
+
 </main>
 
-<footer>
-  <div class="legal-links">
-    <a href="/privacy">Política de privacidad</a>
-    <a href="/terms">Términos y condiciones</a>
-    <a href="mailto:hola@meto.com.ar">Contacto</a>
+<!-- FOOTER ─────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="section-container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <svg class="logo" viewBox="0 0 140 140" width="36" height="36" aria-hidden="true">
+          <rect width="140" height="140" rx="32" fill="#6B3AFF" />
+          <g transform="translate(28, 28)">
+            <rect x="0" y="0" width="38" height="38" rx="4" fill="#FFFFFF" />
+            <rect x="46" y="0" width="38" height="38" rx="4" fill="#FFFFFF" />
+            <rect x="0" y="46" width="38" height="38" rx="4" fill="#FFFFFF" />
+            <rect x="46" y="46" width="38" height="38" rx="4" fill="#FFFFFF" />
+            <circle cx="42" cy="42" r="8" fill="#FF4D6D" />
+          </g>
+        </svg>
+        <div>
+          <p class="footer-name">MeTo</p>
+          <p class="footer-tag">Mercado Touch</p>
+        </div>
+      </div>
+      <nav class="footer-links" aria-label="Enlaces del pie">
+        <a href="/privacy">Política de privacidad</a>
+        <a href="/terms">Términos y condiciones</a>
+        <a href="mailto:hola@meto.com.ar">hola@meto.com.ar</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Avalon Agency SRL · CUIT 30-71734263-8 · Buenos Aires, Argentina</p>
+      <p class="footer-signature">
+        Marca registrada en INPI · Software registrado en DNDA
+      </p>
+    </div>
   </div>
-  <p>© 2026 Avalon Agency SRL · CUIT 30-71734263-8 · Buenos Aires, Argentina</p>
 </footer>
 
+<!-- Noscript fallback ──────────────────────────────── -->
+<noscript>
+  <div style="position:fixed;bottom:16px;left:16px;right:16px;padding:16px 20px;background:#0E0E14;color:#fff;border-radius:12px;font-size:14px;z-index:9999">
+    Para dejar tu email en la lista necesitás habilitar JavaScript. También podés escribirnos a <a href="mailto:hola@meto.com.ar" style="color:#FF4D6D">hola@meto.com.ar</a>.
+  </div>
+</noscript>
+
+<!-- Scripts ────────────────────────────────────────── -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js" defer></script>
+<script src="home.js" defer></script>
 </body>
 </html>
