@@ -71,6 +71,14 @@ body.home {
   letter-spacing: -0.005em;
   transition: background var(--dur-fast) var(--ease-brand);
   text-decoration: none !important;
+  white-space: nowrap;
+}
+.nav-cta > span:first-child { white-space: nowrap; }
+
+@media (max-width: 540px) {
+  .nav-links { gap: 12px; }
+  .nav-links > a:not(.nav-cta) { display: none; }
+  .nav-cta { padding: 7px 12px 7px 16px; font-size: 12px; }
 }
 .nav-cta:hover { background: var(--violet); color: var(--white) !important; }
 .nav-cta-dot {
