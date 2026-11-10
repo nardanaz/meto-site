@@ -362,34 +362,9 @@
     });
   }
 
-  // When chapter changes, kick one-shot interactive sub-animations
-  // that CSS can't own (e.g. typewriter for the price).
-  let _priceTimer = null;
-  function onChapterChange(key) {
-    // Cancel any previous timer so interruptions don't stack
-    if (_priceTimer) {
-      clearTimeout(_priceTimer);
-      _priceTimer = null;
-    }
-    if (key === 'sell') {
-      const priceEl = document.querySelector('.sell-price-text');
-      if (priceEl) {
-        priceEl.textContent = '';
-        typewrite(priceEl, '$3.500', 55, 650);
-      }
-    }
-  }
-
-  function typewrite(el, text, speed, startDelay) {
-    let i = 0;
-    const tick = () => {
-      if (i > text.length) return;
-      el.textContent = text.slice(0, i);
-      i++;
-      _priceTimer = setTimeout(tick, speed);
-    };
-    _priceTimer = setTimeout(tick, startDelay || 0);
-  }
+  // Chapter changes: overlays carry their own CSS animations,
+  // so we don't need to kick anything here. Kept as an extension point.
+  function onChapterChange(_key) { /* no-op */ }
 
   // ────────────────────────────────────────────────────
   // Waitlist form + counter
